@@ -14,14 +14,14 @@ const sidebarItems = [
       {id:1, href: '/dashboard', icon: <FiSearch fontSize={"25px"} />, text: 'Search Players' },
       { id:2,href: '/dashboard', icon: <FaCircleInfo fontSize={"25px"} />, text: 'Info' },
       {id:3, href: '/user-dashboard', icon:<MdDashboard fontSize={"25px"} />, text: 'Dashboard' },
-      { href: 'agent-url', icon: <PiLinkSimpleFill fontSize={"25px"} />, text: 'Agent Url' }
+      {id:5, href: '/agent-url', icon: <PiLinkSimpleFill fontSize={"25px"} />, text: 'Agent Url' }
     ]
   },
   {
     section: 'secondary',
     items: [
-      {id:4, href: '/contact-us', icon: <FcOnlineSupport fontSize={"25px"} /> , text: 'Contact Us' },
-      {id:5, href: '/download-images', icon: <FaImage fontSize={"25px"}/>, text: 'Download Images' }
+      {id:6, href: '/contact-us', icon: <FcOnlineSupport fontSize={"25px"} /> , text: 'Contact Us' },
+      {id:7, href: '/download-images', icon: <FaImage fontSize={"25px"}/>, text: 'Download Images' }
     ]
   },
  

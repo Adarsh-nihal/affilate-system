@@ -27,10 +27,10 @@ const toast=useToast()
   };
 
   return (
-    <div className='flex w-full   h-[100vh] md:items-center md:justify-center p-0 overflow-hidden'>
+    <div className='flex w-full   md:h-[100vh] md:items-center md:justify-center p-0 overflow-hidden'>
       <form
         onSubmit={handleSubmit}
-        className="bg-zinc-900  h-full md:h-[80%] md:border md:border-[#FDB743] w-full p-2 md:w-[500px] md:rounded-2xl"
+        className="lg:bg-zinc-900  h-full md:h-[80%] md:border md:border-[#FDB743] w-full p-2 md:w-[500px] md:rounded-2xl"
       >
         <div className="px-8 py-10 md:px-10">
           <h2 className="text-4xl font-extrabold text-center text-whi-800 ">

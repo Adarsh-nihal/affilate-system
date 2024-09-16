@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { loginFailure, loginRequest, loginSuccess } from '../redux/authredux/action';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import { saveUserDetails } from '../redux/authredux/middleware/localstorageconfig';
+import { retrieveUserDetails, saveUserDetails } from '../redux/authredux/middleware/localstorageconfig';
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,8 +14,10 @@ const Login = () => {
   const toast = useToast();
   const naviagte = useNavigate();
   const [admiBlockStatus,setAdminBlockStatus]=useState(false)
+  const token = retrieveUserDetails('adminauth');
+  console.log(token,"from login")
  const st=useSelector(st=>st)
- console.log(st,'s')
+
   const handleLogin = async (e) => {
     console.log("sjaan")
     e.preventDefault();

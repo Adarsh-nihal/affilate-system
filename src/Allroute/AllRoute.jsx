@@ -9,30 +9,19 @@ import DownloadPage from "../Pages/DownloadPage";
 import ContactUs from "../Pages/ContactUs";
 import Sidebar from "../Component/Sidebar";
 import PermissionWrapper from "./PermissionWrapper";
-const routes = [
-  { path: "/", component: Login, permission: "needed" },
-  { path: "/dashboard", component: Dashboard, permission: "needed" },
-  { path: "user-dashboard", component: UserDashboard, permission: "needed" },
-  { path: "account", component: UserAccount, permission: "needed" },
-  { path: "contact-us", component: ContactUs, permission: "needed" },
-  { path: "more", component: Sidebar, permission: "needed" },
-  { path: "agent-url", component: AgentUrl, permission: "needed" },
-  { path: "download-images", component: DownloadPage, permission: "needed" },
-];
+
 const AllRoute = () => {
   return (
     <Routes>
-     {routes.map((route, index) => (
-        <Route
-          key={index}
-          path={route.path}
-          element={
-            route.permission
-              ?  <route.component />
-              :<PermissionWrapper component={route.component} permissionName={route.permission} />
-          }
-        />
-      ))}
+      <Route path="/" element={<Login />} />
+      <Route path="/dashboard" element={<PermissionWrapper><Dashboard /></PermissionWrapper>} />
+      <Route path="/account" element={<PermissionWrapper><UserAccount /></PermissionWrapper>} />
+      <Route path="/user-dashboard" element={<PermissionWrapper><UserDashboard /></PermissionWrapper>} />
+      <Route path="/contact-us" element={<PermissionWrapper><ContactUs /></PermissionWrapper>} />
+      <Route path="/more" element={<PermissionWrapper><Sidebar /></PermissionWrapper>} />
+      <Route path="/agent-url" element={<PermissionWrapper><AgentUrl /></PermissionWrapper>} />
+      <Route path="/download-images" element={<PermissionWrapper><DownloadPage /></PermissionWrapper>} />
+      <Route path="*" element={<h3>404 Page not found</h3>} />
     </Routes>
   );
 };

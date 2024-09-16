@@ -8,6 +8,7 @@ import Sidebar from './Component/Sidebar'
 import AllRoute from './Allroute/AllRoute'
 import {useLocation} from "react-router-dom"
 import BottomNavbar from './Component/BottomNavbar'
+import PermissionWrapper from './Allroute/PermissionWrapper'
 function App() {
 
   const location=useLocation()
@@ -23,7 +24,7 @@ function App() {
       </div>
       {location.pathname!=="/"&&<div className='fixed  bottom-0 w-[100%] '>
        <BottomNavbar/>
-
+       <PermissionWrapper/>
        </div>}
       
     </div>

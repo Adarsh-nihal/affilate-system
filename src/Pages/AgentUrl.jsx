@@ -1,71 +1,72 @@
 import React from 'react';
+import { useToast } from '@chakra-ui/react';
+import { useSelector } from 'react-redux';
 
 const AgentUrl = () => {
+  const toast = useToast();
+  const affiliateCode = useSelector(state => state.affiliateReducer.affiliateCode);
   const urls = [
-    "https://www.jetwin.club/en-IN/signup?cid=grood05",
-    "https://www.jetwin.club/tw-IN/signup?cid=grood05",
-    "https://www.jetwin.vip/en-IN/signup?cid=grood05",
+    "https://luckydaddy.in?refer_code=",
+    "https://luckydaddy.in?refer_code=",
+    "https://luckydaddy.in?refer_code=",
   ];
 
   const handleCopy = (url) => {
-    navigator.clipboard.writeText(url).then(() => {
-      alert("URL copied to clipboard!");
+    const completeUrl = affiliateCode ? `${url}${affiliateCode}` : url;
+
+    if (!affiliateCode) {
+      toast({
+        title: "Affiliate Code Missing",
+        description: "Unable to generate URL. Affiliate code is not available.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top"
+      });
+      return;
+    }
+
+    navigator.clipboard.writeText(completeUrl).then(() => {
+      toast({
+        title: "Copied",
+        description: "URL copied to clipboard successfully!",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "top"
+      });
     }).catch(err => {
-      console.error("Failed to copy: ", err);
+      toast({
+        title: "Copy Failed",
+        description: "Failed to copy the URL.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top"
+      });
     });
   };
 
   return (
-    <div className="p-5 bg-[#22252A] rounded-[5px]">
-      <h1 className=" text-[#F9BA1F] text-lg md:text-2xl mb-4">Agent URL List</h1>
-      <div className='flex flex-col gap-3'>
-
-      <div className="space-y-1 p-4 rounded-[5px] bg-[#32383D]">
+    <div className="p-5 bg-[#22252A] rounded-lg shadow-lg">
+      <h1 className="text-[#F9BA1F] text-lg md:text-2xl mb-4 text-center">Agent URL List</h1>
+      <div className="flex flex-col gap-5">
         {urls.map((url, index) => (
-          <div key={index} className="flex justify-between items-center  ">
-            <span className="text-white text-xs font-semibold md:text-[16px]">{url}</span>
+          <div key={index} className="p-5 bg-[#32383D] rounded-lg shadow-md flex justify-between items-center transform hover:scale-105 transition duration-300 ease-in-out">
+            <span className="text-white text-xs font-semibold md:text-[16px] break-all">
+              {affiliateCode ? `${url}${affiliateCode}` : url}
+            </span>
             <button
               onClick={() => handleCopy(url)}
-               className="bg-[#FDB743] w-[140px] text-black py-2 px-4 text-sm font-bold md:text-lg rounded hover:bg-[#b99356] transition duration-200"
+              className="bg-gradient-to-r from-green-400 to-blue-500 py-2 px-5 text-black font-bold text-sm md:text-lg rounded-md hover:bg-yellow-600 transition duration-300 ease-in-out"
             >
-              Copy
+              Copy URL
             </button>
           </div>
         ))}
       </div>
-      <div className="space-y-1 p-4 rounded-[5px] bg-[#32383D]">
-        {urls.map((url, index) => (
-          <div key={index} className="flex justify-between items-center  ">
-                      <span className="text-white text-xs font-semibold md:text-[16px]">{url}</span>
-
-            <button
-              onClick={() => handleCopy(url)}
-               className="bg-[#FDB743] w-[140px] text-black py-2 px-4 text-sm font-bold md:text-lg rounded hover:bg-[#b99356] transition duration-200"
-            >
-              Copy
-            </button>
-          </div>
-        ))}
-      </div>
-      <div className="space-y-1 p-4 rounded-[5px] bg-[#32383D]">
-        {urls.map((url, index) => (
-          <div key={index} className="flex justify-between items-center  ">
-                       <span className="text-white text-xs font-semibold md:text-[16px]">{url}</span>
-
-            <button
-              onClick={() => handleCopy(url)}
-              className="bg-[#FDB743] w-[140px] text-black py-2 px-4 text-sm font-bold md:text-lg rounded hover:bg-[#b99356] transition duration-200"
-            >
-              Copy
-            </button>
-          </div>
-        ))}
-      </div>
-      </div>
-
     </div>
   );
 };
 
-
-export default AgentUrl
+export default AgentUrl;

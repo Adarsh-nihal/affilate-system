@@ -11,7 +11,7 @@ const retrieveData = retrieveUserDetails("affilate");
 const adminData = retrieveUserDetails("adminData");
 const initialState = {
     isLoggedIn: retrieveData?.token || "",
-    user: adminData.data || {},
+    user: adminData?.data || {},
     usernameToken: retrieveData?.usernameToken || "",
     adminLayer: adminData?.adminLayer || [],
     error: null,

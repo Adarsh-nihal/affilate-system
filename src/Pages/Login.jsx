@@ -18,13 +18,14 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
   console.log(isLoading, "load");
   const dispatch = useDispatch();
   const toast = useToast();
   const naviagte = useNavigate();
   const [admiBlockStatus, setAdminBlockStatus] = useState(false);
   const token = retrieveUserDetails("adminauth");
+
   console.log(token, "from login");
   const st = useSelector((st) => st);
 

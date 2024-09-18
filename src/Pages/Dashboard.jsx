@@ -1,148 +1,250 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import affilate from '../assets/affilate.png'
+import affilate from "../assets/affilate.png";
+import { fetchGetRequest } from "../api/api";
+import { useDispatch, useSelector } from "react-redux";
+import { setAffiliateCode } from "../redux/afflicateCode/action";
 const Dashboard = () => {
-    const commissionData = [
-        { label: 'Player Win & Losses', value: 'INR 1,000,000' },
-        { label: 'Platform Fee', value: '18%' },
-        { label: 'Bonus', value: 'INR 20,000' },
-        { label: 'Net Win & Losses', value: 'INR 800,000' },
-        { label: 'Commission Rate', value: '50%' },
-        { label: 'Net Commission', value: 'INR 400,000' },
-      ];
-    
-      const steps = [
-        {
-          title: 'Signup',
-          description: 'Exclusive Account with Jeetwin',
-          icon: '👤', // Add relevant icons if necessary
-        },
-        {
-          title: 'Share',
-          description: 'Unique links to share with friends',
-          icon: '🔗',
-        },
-        {
-          title: 'Earn',
-          description: 'Unlimited Commission from player’s losses',
-          icon: '💰',
-        },
-      ];
-    
-      const reviews = [
-        {
-          title: 'Spinsvilla',
-          content: 'Working with the Jeetwin affiliates is both convenient and easy...',
-          rating: 5,
-        },
-        {
-          title: 'Guide2Gambling',
-          content: 'We are happy to work with Jeetwin Affiliates...',
-          rating: 5,
-        },
-        {
-          title: 'LuckyDice',
-          content: 'A completely engaging and exciting online casino experience...',
-          rating: 5,
-        },
-      ];
-    
+  const dispatch = useDispatch();
+ 
+const x=useSelector(state=>state.affilliateReducer)
+console.log(x,"res")
+  const [affiliates, setAffiliates] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const totalPayoutAmount = affiliates?.payouts?.reduce((total, payout) => total + payout.amount, 0) || 0;
+  console.log(affiliates, "asas");
+
+  const commissionData = [
+    { label: "Player Win & Losses", value: "INR 1,000,000" },
+    { label: "Platform Fee", value: "18%" },
+    { label: "Bonus", value: "INR 20,000" },
+    { label: "Net Win & Losses", value: "INR 800,000" },
+    { label: "Commission Rate", value: "50%" },
+    { label: "Net Commission", value: "INR 400,000" },
+  ];
+
+  const steps = [
+    {
+      title: "Signup",
+      description: "Exclusive Account with Jeetwin",
+      icon: "👤", // Add relevant icons if necessary
+    },
+    {
+      title: "Share",
+      description: "Unique links to share with friends",
+      icon: "🔗",
+    },
+    {
+      title: "Earn",
+      description: "Unlimited Commission from player’s losses",
+      icon: "💰",
+    },
+  ];
+
+  const reviews = [
+    {
+      title: "Spinsvilla",
+      content:
+        "Working with the Jeetwin affiliates is both convenient and easy...",
+      rating: 5,
+    },
+    {
+      title: "Guide2Gambling",
+      content: "We are happy to work with Jeetwin Affiliates...",
+      rating: 5,
+    },
+    {
+      title: "LuckyDice",
+      content: "A completely engaging and exciting online casino experience...",
+      rating: 5,
+    },
+  ];
+  const fetchAffiliates = async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetchGetRequest(
+        "/api/affiliate/get-single-affiliate"
+      );
+      const affiliateCode = response.affiliate_code;
+      dispatch(setAffiliateCode(affiliateCode));
+      console.log(response, "responce123");
+      setAffiliates(response); // Assuming response is an array of affiliates
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching affiliates:", error);
+      setIsLoading(false);
+    }
+  };
+  useEffect(() => {
+    fetchAffiliates();
+  }, [dispatch]);
+  console.log(affiliates, "state-affilo");
   return (
-      <div className="text-white  w-full ">
-        {/* Banner */}
-        <div className="w-[100%]">
-         <div className="h-[180px] w-[100%]">
+    <div className="text-white  w-full ">
+      {/* Banner */}
+      <div className="w-[100%]">
+        <div className="h-[180px] w-[100%]">
+          <img
+            src={affilate}
+            alt="App"
+            className="w-[100%]   h-[180px] lg:h-[280px] rounded-[5px]"
+          />
+        </div>
 
-          <img src={affilate} alt="App" className="w-[100%]   h-[180px] lg:h-[280px] rounded-[5px]" />
-         </div>
-
-          <div className=" rounded-[5px] p-6 text-center ">
+        <div className=" rounded-[5px] p-6 text-center ">
           <div className="w-[100%] lg:mt-[100px]">
-            <p className="mt-4 text-2xl font-bold text-[#F9BA1F]" >Earn 50% Commission</p>
-            <p className="font-bold  mt-2 text-sm md:text-lg">Build your career with Jeetwin affiliate network now and start earning immediately.</p>
+            <p className="mt-4 text-2xl font-bold text-[#F9BA1F]">
+              Earn 50% Commission
+            </p>
+            <p className="font-bold  mt-2 text-sm md:text-lg">
+              Build your career with Jeetwin affiliate network now and start
+              earning immediately.
+            </p>
           </div>
-        </div>
-        </div>
-
-        {/* Info cards */}
-        <div className="grid grid-cols-2  gap-2 mt-8">
-          <div className="bg-[#22252A] rounded-[5px] p-4 text-center">
-            <p className="text-[#F9BA1F] text-2xl">NO. 1</p>
-            <p>Brand</p>
-          </div>
-          <div className="bg-[#22252A] rounded-[5px] p-4 text-center">
-            <p className="text-[#F9BA1F] text-2xl">50%</p>
-            <p>Commission</p>
-          </div>
-          <div className="bg-[#22252A] rounded-[5px] p-4 text-center">
-            <p className="text-[#F9BA1F] text-2xl">Extra</p>
-            <p>Awards and Prizes</p>
-          </div>
-          <div className="bg-[#22252A] rounded-[5px] p-4 text-center">
-            <p className="text-[#F9BA1F] text-2xl">0%</p>
-            <p>Payment Fee</p>
-          </div>
-        </div>
-
-        {/* Commission calculation */}
-        <div className=" text-white mt-10 lg:mt-auto ">
-      {/* Commission Calculation Section */}
-      <div className="mb-8 mt-5">
-        <h2 className="text-xl font-semibold mb-4">Commission Calculation</h2>
-        <div className=" flex flex-col gap-2 ">
-          {commissionData.map((item, index) => (
-            <div
-              key={index}
-              className="flex justify-between items-center bg-[#22252A] p-7 rounded-[5px]"
-            >
-              <span>{item.label}</span>
-              <span className="font-bold">{item.value}</span>
-            </div>
-          ))}
         </div>
       </div>
 
-      {/* 3-Steps Section */}
-      <div className="text-center my-6">
-        <h3 className="mt-4 text-2xl font-bold text-[#F9BA1F]">3-Steps to be our partner</h3>
-        <p className="mb-8">Join now and earn unlimited whole life commission and prizes</p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {steps.map((step, index) => (
-            <div key={index} className="bg-[#22252A] p-6 rounded-[5px]">
-              <div className="text-4xl mb-4">{step.icon}</div>
-              <h4 className="font-semibold text-lg mb-2">{step.title}</h4>
-              <p>{step.description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+      {/* Info cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 ">
+  <div className="bg-gradient-to-r from-[#2D3035] to-[#22252A] rounded-[10px] p-6 text-center shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
+    <p className="text-[#F9BA1F] text-3xl font-bold">
+      {affiliates?.affiliate_code || "N/A"}
+    </p>
+    <p className="text-gray-400 text-sm mt-2">Affiliate Code</p>
+  </div>
 
-      {/* Reviews Section */}
+  <div className="bg-gradient-to-r from-[#2D3035] to-[#22252A] rounded-[10px] p-6 text-center shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
+    <p className="text-[#F9BA1F] text-3xl font-bold">
+      {affiliates?.share_percentage || 0}%
+    </p>
+    <p className="text-gray-400 text-sm mt-2">Commission</p>
+  </div>
+
+  <div className="bg-gradient-to-r from-[#2D3035] to-[#22252A] rounded-[10px] p-6 text-center shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
+    <p className="text-[#F9BA1F] text-3xl font-bold">Extra</p>
+    <p className="text-gray-400 text-sm mt-2">Awards and Prizes</p>
+  </div>
+
+  <div className="bg-gradient-to-r from-[#2D3035] to-[#22252A] rounded-[10px] p-6 text-center shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
+    <p className="text-[#F9BA1F] text-3xl font-bold">
+      {affiliates?.platform_fee || 0}%
+    </p>
+    <p className="text-gray-400 text-sm mt-2">Payment Fee</p>
+  </div>
+</div>
+
+
+      {/* Commission calculation */}
+      <div className="text-white mt-10 lg:mt-auto">
+  {/* Commission Calculation Section */}
+  <div className="mb-8 mt-5">
+    <h2 className="text-2xl font-bold mb-4 text-center lg:text-left">
+      Payout Details
+    </h2>
+    <p className="text-lg text-gray-300 mb-4 text-center lg:text-left">
+      Total Payout Amount:{" "}
+      <strong className="text-[#F9BA1F]">{totalPayoutAmount}</strong>
+    </p>
+
+    <div className="flex flex-col gap-4">
+      {/* Only map if payouts exist */}
+      {affiliates?.payouts?.length > 0 ? (
+        affiliates.payouts.map((payout, index) => (
+          <div
+            key={index}
+            className="flex flex-col lg:flex-row justify-between items-start lg:items-center bg-[#1C1F24] p-6 rounded-md shadow-lg  transform hover:scale-105 transition duration-300 ease-in-out "
+          >
+            <div className="flex flex-col gap-2 mb-4 lg:mb-0">
+              <span className="text-base">
+                <strong>Amount:</strong>{" "}
+                <span className="text-[#F9BA1F]">{payout.amount}</span>
+              </span>
+              <span className="text-base">
+                <strong>Payment Method:</strong> {payout.payment_method}
+              </span>
+              <span className="text-base">
+                <strong>Status:</strong>{" "}
+                <span
+                  className={`${
+                    payout.status === "settled"
+                      ? "text-green-500"
+                      : "text-yellow-500"
+                  }`}
+                >
+                  {payout.status}
+                </span>
+              </span>
+            </div>
+            <div className="flex flex-col gap-2">
+              {payout.account_name && (
+                <span className="text-base">
+                  <strong>Account Name:</strong> {payout.account_name}
+                </span>
+              )}
+              {payout.account_no && (
+                <span className="text-base">
+                  <strong>Account No:</strong> {payout.account_no}
+                </span>
+              )}
+              {payout.ifsc_code && (
+                <span className="text-base">
+                  <strong>IFSC Code:</strong> {payout.ifsc_code}
+                </span>
+              )}
+            </div>
+          </div>
+        ))
+      ) : (
+        <p className="text-center mt-2 text-gray-400 bg-[#22252A] p-4 rounded-md border border-dashed border-gray-500">
+          No payouts available
+        </p>
+      )}
+    </div>
+  </div>
+</div>
+
       <div className="my-8">
         <h3 className="text-xl font-semibold mb-4">Reviews</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {reviews.map((review, index) => (
-            <div key={index} className="bg-[#22252A] p-6 rounded-[5px]">
+            <div key={index} className="bg-[#22252A] p-6 rounded-[5px] transform hover:scale-105 transition duration-300 ease-in-out">
               <h4 className="font-semibold text-lg mb-2">{review.title}</h4>
               <p className="mb-4">{review.content}</p>
-              <div className="text-[#F9BA1F]">{'⭐'.repeat(review.rating)}</div>
+              <div className="text-[#F9BA1F]">{"⭐".repeat(review.rating)}</div>
             </div>
           ))}
         </div>
       </div>
-
-      {/* Footer Section */}
       <footer className="mt-8">
-        <div className="text-center space-y-4">
-          <p>About Jeetwin</p>
-          <p>
-            JeetWin was established in 2017... trusted gaming platform offering...
-          </p>
-        </div>
-      </footer>
+  <div className="text-center space-y-4">
+    <p>About Jeetwin</p>
+    <p>
+      JeetWin was established in 2017... trusted gaming platform offering...
+    </p>
+  </div>
+</footer>
     </div>
-      </div>
   );
 };
 
 export default Dashboard;
+
+//   {/* 3-Steps Section */}
+//   <div className="text-center my-6">
+//   <h3 className="mt-4 text-2xl font-bold text-[#F9BA1F]">3-Steps to be our partner</h3>
+//   <p className="mb-8">Join now and earn unlimited whole life commission and prizes</p>
+//   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+//     {steps.map((step, index) => (
+//       <div key={index} className="bg-[#22252A] p-6 rounded-[5px]">
+//         <div className="text-4xl mb-4">{step.icon}</div>
+//         <h4 className="font-semibold text-lg mb-2">{step.title}</h4>
+//         <p>{step.description}</p>
+//       </div>
+//     ))}
+//   </div>
+// </div>
+
+// {/* Reviews Section */}
+
+// {/* Footer Section */}
+

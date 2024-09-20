@@ -1,10 +1,11 @@
 import React from 'react';
 import { useToast } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
+import { retrieveUserDetails } from '../redux/authredux/middleware/localstorageconfig';
 
 const AgentUrl = () => {
   const toast = useToast();
-  const affiliateCode = useSelector(state => state.affiliateReducer.affiliateCode);
+  const {affiliateCode} = retrieveUserDetails('affiliateData');
   const urls = [
     "https://luckydaddy.in?refer_code=",
     "https://luckydaddy.in?refer_code=",

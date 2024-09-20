@@ -1,8 +1,53 @@
 import React, { useState } from "react";
+import { sendPostRequest } from "../api/api";
+import { useToast } from "@chakra-ui/react";
 
 const UserAccount = () => {
   const [activeTab, setActiveTab] = useState("Profile");
-
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const toast = useToast();
+  const handleUpdatePassword = async () => {
+    if (newPassword !== confirmPassword) {
+      toast({
+        title: "Error",
+        description: "New password and confirm password do not match.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+    
+    const data = {
+     oldPassword,
+    newPassword,
+    };
+  
+    try {
+     
+     
+    const response=  await sendPostRequest('/api/affiliate/change-affiliate-password', data);
+    console.log("res-post")
+      toast({
+        title: "Success",
+        description: "Your password has been updated successfully.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+    } catch (error) {
+       console.log(error,"err")
+      toast({
+        title: "Error",
+        description: error.response?.data?.message || "Something went wrong.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
   return (
     <div className="p-6 bg-[#22252A]  rounded-[5px] text-white">
       {/* Tabs */}
@@ -73,32 +118,41 @@ const UserAccount = () => {
         )}
 
         {activeTab === "Change Password" && (
-          <div>
-            <div className="mt-4">
-              <label className="block mb-2">Old Password</label>
-              <input
-                type="password"
-                className="w-full p-2 bg-gray-700 rounded"
-              />
-            </div>
-            <div className="mt-4">
-              <label className="block mb-2">New Password</label>
-              <input
-                type="password"
-                className="w-full p-2 bg-gray-700 rounded"
-              />
-            </div>
-            <div className="mt-4">
-              <label className="block mb-2">Confirm Password</label>
-              <input
-                type="password"
-                className="w-full p-2 bg-gray-700 rounded"
-              />
-            </div>
-            <button className="mt-4 bg-[#FDB743] w-[100%] hover:bg-[#f3b34c] font-bold text-[#22252A] py-2 px-4 rounded">
-              UPDATE PASSWORD
-            </button>
-          </div>
+         <div>
+         <div className="mt-4">
+           <label className="block mb-2">Old Password</label>
+           <input
+             type="password"
+             className="w-full p-2 bg-gray-700 rounded"
+             value={oldPassword}
+             onChange={(e) => setOldPassword(e.target.value)}
+           />
+         </div>
+         <div className="mt-4">
+           <label className="block mb-2">New Password</label>
+           <input
+             type="password"
+             className="w-full p-2 bg-gray-700 rounded"
+             value={newPassword}
+             onChange={(e) => setNewPassword(e.target.value)}
+           />
+         </div>
+         <div className="mt-4">
+           <label className="block mb-2">Confirm Password</label>
+           <input
+             type="password"
+             className="w-full p-2 bg-gray-700 rounded"
+             value={confirmPassword}
+             onChange={(e) => setConfirmPassword(e.target.value)}
+           />
+         </div>
+         <button
+           className="mt-4 bg-[#FDB743] w-[100%] hover:bg-[#f3b34c] font-bold text-[#22252A] py-2 px-4 rounded"
+           onClick={handleUpdatePassword}
+         >
+           UPDATE PASSWORD
+         </button>
+       </div>
         )}
 
         {activeTab === "Bank" && (

@@ -42,6 +42,7 @@ const Sidebar = () => {
   }
   const handleLogout = () => {
     removeFromLocalStorage("adminauth");
+    removeFromLocalStorage('affiliateData')
     toast({
       title: 'Logout Successfully!',
       description: '',
@@ -63,8 +64,6 @@ const Sidebar = () => {
               </p>
             ))}
           </nav>
-         
-           
         </div>
       ))}
        <div className="mt-2 space-y-6">

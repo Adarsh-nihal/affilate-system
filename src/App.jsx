@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -9,9 +9,35 @@ import AllRoute from './Allroute/AllRoute'
 import {useLocation} from "react-router-dom"
 import BottomNavbar from './Component/BottomNavbar'
 import PermissionWrapper from './Allroute/PermissionWrapper'
+import { setAffiliateData } from './redux/afflicateCode/action'
+import { useDispatch, useSelector } from "react-redux";
+import { fetchGetRequest } from './api/api'
+import { saveUserDetails } from './redux/authredux/middleware/localstorageconfig'
 function App() {
-
+  const dispatch=useDispatch()
   const location=useLocation()
+  const reduxData=useSelector(state=>state)
+ 
+
+  const fetchAffiliateData = async () => {
+    try {
+      const response = await fetchGetRequest("/api/affiliate/get-single-affiliate");
+      const affiliateCode = response.data?.affiliate_code;
+      const username = response.data?.username;
+      
+      if (affiliateCode && username) {
+        saveUserDetails('affiliateData', { affiliateCode, username })
+      } else {
+        console.error("Affiliate code or username is null/undefined");
+      }
+    } catch (error) {
+      console.error("Error fetching affiliate data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAffiliateData(); // Fetch data on load
+  }, []);
   return (
     <div className='w-[100%] main'>
       {location.pathname!=="/"&&<TopNavbar/>}

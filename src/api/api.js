@@ -14,11 +14,13 @@ const getHeaders = () => {
   }
   return {};
 };
+
 // Function to send a POST request
 export const sendPostRequest = async (endpoint, data) => {
-  console.log(url,'url')
+  
+  console.log(`${API_BASE_URL}${endpoint}`,'url')
   try {
-    const response = await axios.post(`${API_BASE_URL}/${endpoint}`, data, {
+    const response = await axios.post(`${API_BASE_URL}${endpoint}`, data, {
       headers: getHeaders(),
     });
     console.log(response);
@@ -40,7 +42,7 @@ export const fetchGetRequest = async (endpoint) => {
       headers: getHeaders(),
     });
 
-    return response.data.data;
+    return response.data;
   } catch (error) {
     if (error.response && error.response.status === 401) {
       removeFromLocalStorage("adminauth"); // Call the logout function on 401 error

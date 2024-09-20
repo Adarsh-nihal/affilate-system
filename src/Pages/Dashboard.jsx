@@ -3,14 +3,14 @@ import React, { useEffect, useState } from "react";
 import affilate from "../assets/affilate.png";
 import { fetchGetRequest } from "../api/api";
 import { useDispatch, useSelector } from "react-redux";
-import { setAffiliateCode } from "../redux/afflicateCode/action";
+import {  setAffiliateData } from "../redux/afflicateCode/action";
 const Dashboard = () => {
-  const dispatch = useDispatch();
+ const dispatch = useDispatch();
  
 const x=useSelector(state=>state.affilliateReducer)
 console.log(x,"res")
   const [affiliates, setAffiliates] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+
   const totalPayoutAmount = affiliates?.payouts?.reduce((total, payout) => total + payout.amount, 0) || 0;
   console.log(affiliates, "asas");
 
@@ -59,26 +59,29 @@ console.log(x,"res")
       rating: 5,
     },
   ];
+
   const fetchAffiliates = async () => {
     try {
-      setIsLoading(true);
+
       const response = await fetchGetRequest(
         "/api/affiliate/get-single-affiliate"
       );
-      const affiliateCode = response.affiliate_code;
-      dispatch(setAffiliateCode(affiliateCode));
+      const affiliateCode = response.data.affiliate_code;
+      const username=response.data.username
+      dispatch(setAffiliateData(affiliateCode,username));
       console.log(response, "responce123");
-      setAffiliates(response); // Assuming response is an array of affiliates
-      setIsLoading(false);
+      setAffiliates(response.data); // Assuming response is an array of affiliates
+ 
     } catch (error) {
       console.error("Error fetching affiliates:", error);
-      setIsLoading(false);
+  
     }
   };
+
   useEffect(() => {
     fetchAffiliates();
-  }, [dispatch]);
-  console.log(affiliates, "state-affilo");
+  }, []);
+
   return (
     <div className="text-white  w-full ">
       {/* Banner */}
@@ -229,22 +232,5 @@ console.log(x,"res")
 
 export default Dashboard;
 
-//   {/* 3-Steps Section */}
-//   <div className="text-center my-6">
-//   <h3 className="mt-4 text-2xl font-bold text-[#F9BA1F]">3-Steps to be our partner</h3>
-//   <p className="mb-8">Join now and earn unlimited whole life commission and prizes</p>
-//   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-//     {steps.map((step, index) => (
-//       <div key={index} className="bg-[#22252A] p-6 rounded-[5px]">
-//         <div className="text-4xl mb-4">{step.icon}</div>
-//         <h4 className="font-semibold text-lg mb-2">{step.title}</h4>
-//         <p>{step.description}</p>
-//       </div>
-//     ))}
-//   </div>
-// </div>
 
-// {/* Reviews Section */}
-
-// {/* Footer Section */}
 

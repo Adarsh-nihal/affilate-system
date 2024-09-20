@@ -1,16 +1,18 @@
-// src/redux/reducers/affiliateReducer.js
-import { SET_AFFILIATE_CODE } from './actionType';
+// reducer.js
+import { SET_AFFILIATE_DATA } from './actionType';
 
 const initialState = {
-  affiliateCode: '',
+  affiliateCode: null,
+  username: null,
 };
 
 const affiliateReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_AFFILIATE_CODE:
+    case SET_AFFILIATE_DATA:
       return {
         ...state,
-        affiliateCode: action.payload,
+        affiliateCode: action.payload.affiliateCode,
+        username: action.payload.username,
       };
     default:
       return state;

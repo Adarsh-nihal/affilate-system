@@ -45,6 +45,7 @@ const Login = () => {
         `${import.meta.env.VITE_API_URL}/api/affiliate/affiliate-login`,
         payload
       );
+      console.log(response,"from-login-aj")
       if (response.data.success) {
         setIsLoading(false);
         toast({

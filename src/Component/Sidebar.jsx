@@ -6,6 +6,7 @@ import { MdDashboard } from 'react-icons/md'
 import { PiLinkSimpleFill } from 'react-icons/pi'
 import { FcOnlineSupport } from "react-icons/fc";
 import { useNavigate } from 'react-router-dom'
+import { removeFromLocalStorage } from '../redux/authredux/middleware/localstorageconfig'
 
 const sidebarItems = [
   {
@@ -40,6 +41,8 @@ const Sidebar = () => {
     navigate(item.href)
   }
   const handleLogout = () => {
+    removeFromLocalStorage("adminauth");
+    removeFromLocalStorage('affiliateData')
     toast({
       title: 'Logout Successfully!',
       description: '',
@@ -61,8 +64,6 @@ const Sidebar = () => {
               </p>
             ))}
           </nav>
-         
-           
         </div>
       ))}
        <div className="mt-2 space-y-6">

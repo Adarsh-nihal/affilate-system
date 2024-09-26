@@ -97,7 +97,7 @@ console.log(x,"res")
         <div className=" rounded-[5px] p-6 text-center ">
           <div className="w-[100%] lg:mt-[100px]">
             <p className="mt-4 text-2xl font-bold text-[#F9BA1F]">
-              Earn 50% Commission
+              Earn {affiliates?.share_percentage || 0}% Commission
             </p>
             <p className="font-bold  mt-2 text-sm md:text-lg">
               Build your career with Jeetwin affiliate network now and start
@@ -109,26 +109,26 @@ console.log(x,"res")
 
       {/* Info cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 ">
-  <div className="bg-gradient-to-r from-[#2D3035] to-[#22252A] rounded-[10px] p-6 text-center shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
+  <div className="bg-gradient-to-r from-[#2D3035] to-[#22252A] rounded-[10px] p-6 text-center shadow-lg ">
     <p className="text-[#F9BA1F] text-3xl font-bold">
       {affiliates?.affiliate_code || "N/A"}
     </p>
     <p className="text-gray-400 text-sm mt-2">Affiliate Code</p>
   </div>
 
-  <div className="bg-gradient-to-r from-[#2D3035] to-[#22252A] rounded-[10px] p-6 text-center shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
+  <div className="bg-gradient-to-r from-[#2D3035] to-[#22252A] rounded-[10px] p-6 text-center shadow-lg ">
     <p className="text-[#F9BA1F] text-3xl font-bold">
       {affiliates?.share_percentage || 0}%
     </p>
     <p className="text-gray-400 text-sm mt-2">Commission</p>
   </div>
 
-  <div className="bg-gradient-to-r from-[#2D3035] to-[#22252A] rounded-[10px] p-6 text-center shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
+  <div className="bg-gradient-to-r from-[#2D3035] to-[#22252A] rounded-[10px] p-6 text-center shadow-lg ">
     <p className="text-[#F9BA1F] text-3xl font-bold">Extra</p>
     <p className="text-gray-400 text-sm mt-2">Awards and Prizes</p>
   </div>
 
-  <div className="bg-gradient-to-r from-[#2D3035] to-[#22252A] rounded-[10px] p-6 text-center shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
+  <div className="bg-gradient-to-r from-[#2D3035] to-[#22252A] rounded-[10px] p-6 text-center shadow-lg ">
     <p className="text-[#F9BA1F] text-3xl font-bold">
       {affiliates?.platform_fee || 0}%
     </p>
@@ -155,7 +155,7 @@ console.log(x,"res")
         affiliates.payouts.map((payout, index) => (
           <div
             key={index}
-            className="flex flex-col lg:flex-row justify-between items-start lg:items-center bg-[#1C1F24] p-6 rounded-md shadow-lg  transform hover:scale-105 transition duration-300 ease-in-out "
+            className="flex flex-col lg:flex-row justify-between items-start lg:items-center bg-[#1C1F24] p-6 rounded-md shadow-lg   "
           >
             <div className="flex flex-col gap-2 mb-4 lg:mb-0">
               <span className="text-base">
@@ -210,7 +210,7 @@ console.log(x,"res")
         <h3 className="text-xl font-semibold mb-4">Reviews</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {reviews.map((review, index) => (
-            <div key={index} className="bg-[#22252A] p-6 rounded-[5px] transform hover:scale-105 transition duration-300 ease-in-out">
+            <div key={index} className="bg-[#22252A] p-6 rounded-[5px]">
               <h4 className="font-semibold text-lg mb-2">{review.title}</h4>
               <p className="mb-4">{review.content}</p>
               <div className="text-[#F9BA1F]">{"⭐".repeat(review.rating)}</div>

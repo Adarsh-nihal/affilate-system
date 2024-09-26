@@ -53,13 +53,13 @@ const AgentUrl = () => {
       <h1 className="text-[#F9BA1F] text-lg md:text-2xl mb-4 text-center">Agent URL List</h1>
       <div className="flex flex-col gap-5">
         {urls.map((url, index) => (
-          <div key={index} className="p-5 bg-[#32383D] rounded-lg shadow-md flex justify-between items-center transform hover:scale-105 transition duration-300 ease-in-out">
+          <div key={index} className="p-5 bg-[#32383D] rounded-lg shadow-md flex justify-between items-center ">
             <span className="text-white text-xs font-semibold md:text-[16px] break-all">
               {affiliateCode ? `${url}${affiliateCode}` : url}
             </span>
             <button
               onClick={() => handleCopy(url)}
-              className="bg-gradient-to-r from-green-400 to-blue-500 py-2 px-5 text-black font-bold text-sm md:text-lg rounded-md hover:bg-yellow-600 transition duration-300 ease-in-out"
+              className="bg-gradient-to-r from-green-400 to-blue-500 py-2 px-5 text-black font-bold text-sm md:text-lg rounded-md hover:bg-yellow-600 "
             >
               Copy URL
             </button>

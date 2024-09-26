@@ -15,7 +15,7 @@ import {
   saveUserDetails,
 } from "../redux/authredux/middleware/localstorageconfig";
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [username, setusername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -31,21 +31,34 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    
+    // Validation for empty fields
+    if (!username.trim() || !password.trim()) {
+      toast({
+        title: "Please fill in both username and password.",
+        status: "warning",
+        duration: 2000,
+        position: "top",
+        isClosable: true,
+      });
+      return;
+    }
+  
     setIsLoading(true);
     const payload = {
-      username: email.trim(),
+      username: username.trim(),
       password: password.trim(),
     };
     console.log(payload, "m");
     dispatch(loginRequest());
     setAdminBlockStatus(false);
     try {
-      // const response = await axios.post("http://localhost:8094/api/admin/admin-login", payload);
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/affiliate/affiliate-login`,
         payload
       );
-      console.log(response,"from-login-aj")
+      console.log(response, "from-login-aj");
+      
       if (response.data.success) {
         setIsLoading(false);
         toast({
@@ -55,18 +68,18 @@ const Login = () => {
           position: "top",
           isClosable: true,
         });
-
+  
         dispatch(loginSuccess(response.data));
-
+  
         const admindetails = {
           token: response?.data?.token,
           usernametoken: response?.data?.usernameToken,
         };
-
-        naviagte(response.data.redirect);
+  
+        naviagte('/dashboard');
         saveUserDetails("adminauth", admindetails);
         console.log(response, "during login");
-
+  
         saveUserDetails("adminData", response.data);
       } else if (!response.data.success && response.data.status === "401") {
         setIsLoading(false);
@@ -103,11 +116,12 @@ const Login = () => {
         position: "top",
         isClosable: true,
       });
-
+  
       dispatch(loginFailure(error.message));
       setIsLoading(false);
     }
   };
+  
 
   return (
     <div className="flex w-full   md:h-[100vh] md:items-center md:justify-center p-0 overflow-hidden">
@@ -126,18 +140,18 @@ const Login = () => {
             <div className="relative">
               <label
                 className="block mb-3 text-sm font-medium text-zinc-600 "
-                htmlFor="email"
+                htmlFor="username"
               >
-                Email
+                username
               </label>
               <input
-                placeholder="adarsh@example.com"
+                placeholder="affilate123"
                 className="block w-full outline-none px-4 py-3 mt-2 text-white bg-[#27272A] border-2 rounded-lg border-gray-700 focus:border-yellow-500  "
-                name="email"
-                id="email"
+                name="username"
+                id="username"
                 type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={username}
+                onChange={(e) => setusername(e.target.value)}
               />
             </div>
             <div className="mt-6 relative ">

@@ -28,7 +28,7 @@ export const sendPostRequest = async (endpoint, data) => {
   } catch (error) {
     if (error.response && error.response.status === 401) {
       removeFromLocalStorage("adminauth"); // Call the logout function on 401 error
-      window.location.href = "/login"; // Redirect to login page on 401 error
+      // window.location.href = "/login"; // Redirect to login page on 401 error
       return;
     }
     throw error.response;
@@ -46,7 +46,7 @@ export const fetchGetRequest = async (endpoint) => {
   } catch (error) {
     if (error.response && error.response.status === 401) {
       removeFromLocalStorage("adminauth"); // Call the logout function on 401 error
-      window.location.href = "/login"; // Redirect to login page on 401 error
+      // window.location.href = "/login"; // Redirect to login page on 401 error
       return;
     }
     throw error;

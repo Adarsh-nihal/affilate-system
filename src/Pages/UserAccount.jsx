@@ -1,14 +1,28 @@
 import React, { useState } from "react";
 import { sendPostRequest } from "../api/api";
-import { useToast } from "@chakra-ui/react";
-
+import { Spinner, useToast } from "@chakra-ui/react";
+import { retrieveUserDetails } from "../redux/authredux/middleware/localstorageconfig";
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 const UserAccount = () => {
   const [activeTab, setActiveTab] = useState("Profile");
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+const [updateLoading,setUpdateLoading]=useState(false)
   const toast = useToast();
   const handleUpdatePassword = async () => {
+    if(!newPassword || !confirmPassword || !oldPassword){
+      return toast({
+        title: "warning",
+        description: "Fill all the details.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
     if (newPassword !== confirmPassword) {
       toast({
         title: "Error",
@@ -19,17 +33,14 @@ const UserAccount = () => {
       });
       return;
     }
-    
     const data = {
      oldPassword,
     newPassword,
     };
-  
+    setUpdateLoading(true)
     try {
-     
-     
     const response=  await sendPostRequest('/api/affiliate/change-affiliate-password', data);
-    console.log("res-post")
+    console.log(response,"response")
       toast({
         title: "Success",
         description: "Your password has been updated successfully.",
@@ -47,7 +58,21 @@ const UserAccount = () => {
         isClosable: true,
       });
     }
+    finally{
+    setUpdateLoading(false)
+
+    }
   };
+  const togglePasswordVisibility = (setStateFunc, currentState) => {
+    setStateFunc(!currentState);
+  };
+
+  const details = retrieveUserDetails("adminData");
+
+const adminData=details?.data?._doc
+console.log(adminData,"adminData")
+
+
   return (
     <div className="p-6 bg-[#22252A]  rounded-[5px] text-white">
       {/* Tabs */}
@@ -87,27 +112,27 @@ const UserAccount = () => {
             <div className="flex flex-col gap-4 text-sm lg:text-[16px]   p-4 lg:w-[40%]">
               <h2 className="text-lg lg:text-xl font-semibold  text-[#EAB305]">Personnel Information</h2>
               <p className="flex items-center justify-between">
-                Username: <span className="font-medium">groot khan</span>
+                Username: <span className="font-medium">{adminData?.username}</span>
               </p>
               <p className="flex items-center justify-between">
-                Status: <span className="font-medium">Active</span>
+                Status: <span className="font-medium">{adminData?.status?"Active":"InActive"}</span>
               </p>
               <p className="flex items-center justify-between">
                 Registered:{" "}
-                <span className="font-medium">2024-09-05 01:55:59</span>
+                <span className="font-medium">{adminData?.joined_at}</span>
               </p>
             </div>
             <div className="w-[100%] bg-black h-[2px]"></div>
             <div className="flex flex-col gap-4 text-sm lg:text-[16px]  p-4  lg:w-[40%]">
               <h2 className=" text-lg lg:text-xl  font-semibold text-[#EAB305]">Contact Information</h2>
               <p className="flex items-center justify-between">
-                Email: <span className="font-medium">groot95@gmail.com</span>
+                Email: <span className="font-medium">{adminData?.email}</span>
               </p>
               <p className="flex items-center justify-between">
-                Phone: <span className="font-medium">7982720940</span>
+                Phone: <span className="font-medium">{adminData?.phone}</span>
               </p>
               <p className="flex items-center justify-between">
-                Whatsapp: <span className="font-medium">7982720940</span>
+                Whatsapp: <span className="font-medium">{adminData?.whatsapp||"N/A"}</span>
               </p>
               
             </div>
@@ -117,43 +142,68 @@ const UserAccount = () => {
           </div>
         )}
 
-        {activeTab === "Change Password" && (
-         <div>
-         <div className="mt-4">
-           <label className="block mb-2">Old Password</label>
-           <input
-             type="password"
-             className="w-full p-2 bg-gray-700 rounded"
-             value={oldPassword}
-             onChange={(e) => setOldPassword(e.target.value)}
-           />
-         </div>
-         <div className="mt-4">
-           <label className="block mb-2">New Password</label>
-           <input
-             type="password"
-             className="w-full p-2 bg-gray-700 rounded"
-             value={newPassword}
-             onChange={(e) => setNewPassword(e.target.value)}
-           />
-         </div>
-         <div className="mt-4">
-           <label className="block mb-2">Confirm Password</label>
-           <input
-             type="password"
-             className="w-full p-2 bg-gray-700 rounded"
-             value={confirmPassword}
-             onChange={(e) => setConfirmPassword(e.target.value)}
-           />
-         </div>
-         <button
-           className="mt-4 bg-[#FDB743] w-[100%] hover:bg-[#f3b34c] font-bold text-[#22252A] py-2 px-4 rounded"
-           onClick={handleUpdatePassword}
-         >
-           UPDATE PASSWORD
-         </button>
-       </div>
+        <div>
+        {activeTab === 'Change Password' && (
+          <div>
+            <div className="mt-4 relative">
+              <label className="block mb-2">Old Password</label>
+              <input
+                type={showOldPassword ? 'text' : 'password'}
+                className="w-full p-2 bg-gray-700 outline-none border border-yellow-500 rounded"
+                value={oldPassword}
+                onChange={(e) => setOldPassword(e.target.value)}
+              />
+              <div
+                className="absolute top-11 right-4 cursor-pointer"
+                onClick={() => togglePasswordVisibility(setShowOldPassword, showOldPassword)}
+              >
+                {showOldPassword ? <FaEyeSlash /> : <FaEye />}
+              </div>
+            </div>
+  
+            <div className="mt-4 relative">
+              <label className="block mb-2">New Password</label>
+              <input
+                type={showNewPassword ? 'text' : 'password'}
+                className="w-full p-2 bg-gray-700 outline-none border border-yellow-500   rounded"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+              />
+              <div
+                className="absolute top-11 right-4 cursor-pointer"
+                onClick={() => togglePasswordVisibility(setShowNewPassword, showNewPassword)}
+              >
+                {showNewPassword ? <FaEyeSlash /> : <FaEye />}
+              </div>
+            </div>
+  
+            <div className="mt-4 relative">
+              <label className="block mb-2">Confirm Password</label>
+              <input
+                type={showConfirmPassword ? 'text' : 'password'}
+                className="w-full p-2 bg-gray-700 rounded outline-none border border-yellow-500"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              <div
+                className="absolute top-11 right-4 cursor-pointer"
+                onClick={() => togglePasswordVisibility(setShowConfirmPassword, showConfirmPassword)}
+              >
+                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+              </div>
+            </div>
+  
+            <button
+            disabled={updateLoading}
+              className="mt-4 bg-[#FDB743] w-[100%] hover:bg-[#f3b34c] font-bold text-[#22252A] py-2 px-4 rounded"
+              onClick={handleUpdatePassword}
+            >
+             {updateLoading?<Spinner/>:'UPDATE PASSWORD'}
+            </button>
+          </div>
         )}
+      </div>
+  
 
         {activeTab === "Bank" && (
            <div className="">

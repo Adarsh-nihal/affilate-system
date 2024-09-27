@@ -23,13 +23,12 @@ export const sendPostRequest = async (endpoint, data) => {
     const response = await axios.post(`${API_BASE_URL}${endpoint}`, data, {
       headers: getHeaders(),
     });
-    console.log(response);
-    return response.data;
+    console.log(response,"afdsfasdff");
+    return response;
   } catch (error) {
     if (error.response && error.response.status === 401) {
-      removeFromLocalStorage("adminauth"); // Call the logout function on 401 error
       // window.location.href = "/login"; // Redirect to login page on 401 error
-      return;
+      return error;
     }
     throw error.response;
   }

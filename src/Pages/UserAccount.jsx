@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { sendPostRequest } from "../api/api";
 import { Spinner, useToast } from "@chakra-ui/react";
-import { retrieveUserDetails } from "../redux/authredux/middleware/localstorageconfig";
+import { removeFromLocalStorage, retrieveUserDetails } from "../redux/authredux/middleware/localstorageconfig";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useNavigate } from "react-router-dom";
 const UserAccount = () => {
   const [activeTab, setActiveTab] = useState("Profile");
   const [oldPassword, setOldPassword] = useState("");
@@ -13,56 +14,82 @@ const UserAccount = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 const [updateLoading,setUpdateLoading]=useState(false)
   const toast = useToast();
+  const navigate=useNavigate()
   const handleUpdatePassword = async () => {
-    if(!newPassword || !confirmPassword || !oldPassword){
+    // Check if any field is missing
+    if (!newPassword || !confirmPassword || !oldPassword) {
       return toast({
-        title: "warning",
-        description: "Fill all the details.",
+        title: "Warning",
+        description: "Please fill in all the fields.",
         status: "error",
         duration: 3000,
         isClosable: true,
       });
     }
+  
+    // Check if passwords match
     if (newPassword !== confirmPassword) {
-      toast({
+      return toast({
         title: "Error",
         description: "New password and confirm password do not match.",
         status: "error",
         duration: 3000,
         isClosable: true,
       });
-      return;
     }
-    const data = {
-     oldPassword,
-    newPassword,
-    };
-    setUpdateLoading(true)
+  
+    const data = { oldPassword, newPassword };
+    setUpdateLoading(true); // Set loading state
+  
     try {
-    const response=  await sendPostRequest('/api/affiliate/change-affiliate-password', data);
-    console.log(response,"response")
+      // Call the API to update password
+      const response = await sendPostRequest('/api/affiliate/change-affiliate-password', data);
+      console.log(response, "response");
+
+      // Success toast
+      
+      if(response?.data?.status=="200"){
+        toast({
+          title: "success",
+          description: response.data.message || "Password updated successfully.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      removeFromLocalStorage("adminauth"); // Call the logout function on 401 error
+     navigate("/login"); // Redirect to login page on 401 error
+
+      }
+      
+      if(response?.response?.data?.status=="401"){
       toast({
-        title: "Success",
-        description: "Your password has been updated successfully.",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-      });
-    } catch (error) {
-       console.log(error,"err")
-      toast({
-        title: "Error",
-        description: error.response?.data?.message || "Something went wrong.",
+        title: "error",
+        description: response.response.data.message || "",
         status: "error",
         duration: 3000,
         isClosable: true,
       });
+      return 
     }
-    finally{
-    setUpdateLoading(false)
+    
 
+    } catch (error) {
+      console.error(error, "error");
+      
+      // Error toast
+      toast({
+        title: "Error",
+        description: response?.response?.data?.message || "Something went wrong. Please try again.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    } finally {
+      setUpdateLoading(false); // Reset loading state
     }
   };
+  
+
   const togglePasswordVisibility = (setStateFunc, currentState) => {
     setStateFunc(!currentState);
   };

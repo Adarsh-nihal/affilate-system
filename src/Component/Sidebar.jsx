@@ -7,6 +7,7 @@ import { PiLinkSimpleFill } from 'react-icons/pi'
 import { FcOnlineSupport } from "react-icons/fc";
 import { useNavigate } from 'react-router-dom'
 import { removeFromLocalStorage } from '../redux/authredux/middleware/localstorageconfig'
+import { GrTransaction } from 'react-icons/gr'
 
 const sidebarItems = [
   {
@@ -15,14 +16,17 @@ const sidebarItems = [
       {id:1, href: '/dashboard', icon: <FiSearch fontSize={"25px"} />, text: 'Search Players' },
       { id:2,href: '/dashboard', icon: <FaCircleInfo fontSize={"25px"} />, text: 'Info' },
       {id:3, href: '/user-dashboard', icon:<MdDashboard fontSize={"25px"} />, text: 'Dashboard' },
-      {id:5, href: '/agent-url', icon: <PiLinkSimpleFill fontSize={"25px"} />, text: 'Agent Url' }
+      {id:5, href: '/agent-url', icon: <PiLinkSimpleFill fontSize={"25px"} />, text: 'Agent Url' },
+      {id:6, href: '/affiliate-transcation', icon: <GrTransaction fontSize={"25px"} />, text: 'Affiliate Transcation' },
+
+      
     ]
   },
   {
     section: 'secondary',
     items: [
-      {id:6, href: '/contact-us', icon: <FcOnlineSupport fontSize={"25px"} /> , text: 'Contact Us' },
-      {id:7, href: '/download-images', icon: <FaImage fontSize={"25px"}/>, text: 'Download Images' }
+      {id:7, href: '/contact-us', icon: <FcOnlineSupport fontSize={"25px"} /> , text: 'Contact Us' },
+      {id:8, href: '/download-images', icon: <FaImage fontSize={"25px"}/>, text: 'Download Images' }
     ]
   },
  

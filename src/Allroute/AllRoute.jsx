@@ -9,6 +9,7 @@ import DownloadPage from "../Pages/DownloadPage";
 import ContactUs from "../Pages/ContactUs";
 import Sidebar from "../Component/Sidebar";
 import PermissionWrapper from "./PermissionWrapper";
+import Transaction from "../Pages/Transaction";
 
 const AllRoute = () => {
   return (
@@ -20,6 +21,8 @@ const AllRoute = () => {
       <Route path="/contact-us" element={<PermissionWrapper><ContactUs /></PermissionWrapper>} />
       <Route path="/more" element={<PermissionWrapper><Sidebar /></PermissionWrapper>} />
       <Route path="/agent-url" element={<PermissionWrapper><AgentUrl /></PermissionWrapper>} />
+      <Route path="/affiliate-transcation" element={<PermissionWrapper><Transaction /></PermissionWrapper>} />
+
       <Route path="/download-images" element={<PermissionWrapper><DownloadPage /></PermissionWrapper>} />
       <Route path="*" element={<h3>404 Page not found</h3>} />
     </Routes>

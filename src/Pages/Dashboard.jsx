@@ -11,7 +11,6 @@ const x=useSelector(state=>state.affilliateReducer)
 console.log(x,"res")
   const [affiliates, setAffiliates] = useState([]);
 
-  const totalPayoutAmount = affiliates?.payouts?.reduce((total, payout) => total + payout.amount, 0) || 0;
   console.log(affiliates, "asas");
 
   const commissionData = [
@@ -137,74 +136,58 @@ console.log(x,"res")
 </div>
 
 
-      {/* Commission calculation */}
-      <div className="text-white mt-10 lg:mt-auto">
-  {/* Commission Calculation Section */}
-  <div className="mb-8 mt-5">
-    <h2 className="text-2xl font-bold mb-4 text-center lg:text-left">
-      Payout Details
-    </h2>
-    <p className="text-lg text-gray-300 mb-4 text-center lg:text-left">
-      Total Payout Amount:{" "}
-      <strong className="text-[#F9BA1F]">{totalPayoutAmount}</strong>
-    </p>
+  
 
-    <div className="flex flex-col gap-4">
-      {/* Only map if payouts exist */}
-      {affiliates?.payouts?.length > 0 ? (
-        affiliates.payouts.map((payout, index) => (
-          <div
-            key={index}
-            className="flex flex-col lg:flex-row justify-between items-start lg:items-center bg-[#1C1F24] p-6 rounded-md shadow-lg   "
-          >
-            <div className="flex flex-col gap-2 mb-4 lg:mb-0">
-              <span className="text-base">
-                <strong>Amount:</strong>{" "}
-                <span className="text-[#F9BA1F]">{payout.amount}</span>
-              </span>
-              <span className="text-base">
-                <strong>Payment Method:</strong> {payout.payment_method}
-              </span>
-              <span className="text-base">
-                <strong>Status:</strong>{" "}
-                <span
-                  className={`${
-                    payout.status === "settled"
-                      ? "text-green-500"
-                      : "text-yellow-500"
-                  }`}
-                >
-                  {payout.status}
-                </span>
-              </span>
-            </div>
-            <div className="flex flex-col gap-2">
-              {payout.account_name && (
-                <span className="text-base">
-                  <strong>Account Name:</strong> {payout.account_name}
-                </span>
-              )}
-              {payout.account_no && (
-                <span className="text-base">
-                  <strong>Account No:</strong> {payout.account_no}
-                </span>
-              )}
-              {payout.ifsc_code && (
-                <span className="text-base">
-                  <strong>IFSC Code:</strong> {payout.ifsc_code}
-                </span>
-              )}
-            </div>
-          </div>
-        ))
-      ) : (
-        <p className="text-center mt-2 text-gray-400 bg-[#22252A] p-4 rounded-md border border-dashed border-gray-500">
-          No payouts available
-        </p>
-      )}
+   <div className=" text-white  mt-8">
+      <h1 className="text-xl mb-3">Commission Calculation</h1>
+
+      <div className="mb-4 bg-gradient-to-r from-[#2D3035] to-[#22252A] rounded-[6px] p-2 ">
+        <div className="flex justify-between p-4  rounded-md">
+          <span>Player Win & Losses</span>
+          <span>INR 1,000,000</span>
+        </div>
+      </div>
+
+      <div className="mb-4 bg-gradient-to-r from-[#2D3035] to-[#22252A] rounded-[6px] p-2 ">
+
+        <div className="flex justify-between p-4  rounded-md">
+          <span>Platform Fee</span>
+          <span>18%</span>
+        </div>
+      </div>
+
+      <div className="mb-4 bg-gradient-to-r from-[#2D3035] to-[#22252A] rounded-[6px] p-2 ">
+
+        <div className="flex justify-between p-4 rounded-md">
+          <span>Bonus</span>
+          <span>INR 20,000</span>
+        </div>
+      </div>
+
+      <div className="mb-4 bg-gradient-to-r from-[#2D3035] to-[#22252A] rounded-[6px] p-2 ">
+
+        <div className="flex justify-between p-4 rounded-md">
+          <span>Net Win & Losses</span>
+          <span>INR 800,000</span>
+        </div>
+      </div>
+
+      <div className="mb-4 bg-gradient-to-r from-[#2D3035] to-[#22252A] rounded-[6px] p-2 ">
+
+        <div className="flex justify-between p-4 rounded-md">
+          <span>Commission Rate</span>
+          <span>50%</span>
+        </div>
+      </div>
+
+      <div className="mb-4 bg-gradient-to-r from-[#2D3035] to-[#22252A] rounded-[6px] p-2 ">
+
+        <div className="flex justify-between p-4  rounded-md">
+          <span>Net Commission</span>
+          <span>INR 400,000</span>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
       <div className="my-8">
         <h3 className="text-xl font-semibold mb-4">Reviews</h3>

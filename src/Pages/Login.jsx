@@ -79,7 +79,6 @@ const Login = () => {
         naviagte('/dashboard');
         saveUserDetails("adminauth", admindetails);
         console.log(response, "during login");
-  
         saveUserDetails("adminData", response.data);
       } else if (!response.data.success && response.data.status === "401") {
         setIsLoading(false);

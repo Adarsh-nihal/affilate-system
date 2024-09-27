@@ -5,6 +5,7 @@ import { HiUser } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 const TopNavbar = () => {
   const navigate=useNavigate()
+  
   return (
     <div className="w-[100%] text-white fixed top-0 bg-black p-2 lg:p-4 ">
       <div className="flex justify-between items-center w-[100%]">

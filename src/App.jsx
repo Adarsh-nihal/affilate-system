@@ -9,7 +9,7 @@ import AllRoute from './Allroute/AllRoute'
 import {useLocation} from "react-router-dom"
 import BottomNavbar from './Component/BottomNavbar'
 import PermissionWrapper from './Allroute/PermissionWrapper'
-import { setAffiliateData } from './redux/afflicateCode/action'
+import { setAffiliateData, setAffiliateDetailData } from './redux/afflicateCode/action'
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGetRequest } from './api/api'
 import { saveUserDetails } from './redux/authredux/middleware/localstorageconfig'
@@ -24,7 +24,7 @@ function App() {
       const response = await fetchGetRequest("/api/affiliate/get-single-affiliate");
       const affiliateCode = response.data?.affiliate_code;
       const username = response.data?.username;
-      
+       dispatch(setAffiliateDetailData(response?.data))
       if (affiliateCode && username) {
         saveUserDetails('affiliateData', { affiliateCode, username })
       } else {

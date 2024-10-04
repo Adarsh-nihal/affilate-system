@@ -48,6 +48,7 @@ const Login = () => {
     const payload = {
       username: username.trim(),
       password: password.trim(),
+      site_auth_key:import.meta.env.VITE_API_SITE_AUTH_KEY
     };
     console.log(payload, "m");
     dispatch(loginRequest());

@@ -62,9 +62,7 @@ console.log(x,"res")
   const fetchAffiliates = async () => {
     try {
 
-      const response = await fetchGetRequest(
-        "/api/affiliate/get-single-affiliate"
-      );
+      const response = await fetchGetRequest("/api/affiliate/get-single-affiliate?site_auth_key=BspAuthKey123");
       const affiliateCode = response.data.affiliate_code;
       const username=response.data.username
       dispatch(setAffiliateData(affiliateCode,username));

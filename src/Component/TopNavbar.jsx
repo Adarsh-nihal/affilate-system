@@ -3,9 +3,15 @@ import logo from "../assets/jeetwin.png";
 import { PiLinkSimpleBold } from "react-icons/pi";
 import { HiUser } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
+import { retrieveUserDetails } from "../redux/authredux/middleware/localstorageconfig";
+import { useSelector } from "react-redux";
 const TopNavbar = () => {
   const navigate=useNavigate()
-  
+  const affilateSingleDetails=useSelector((state=>state?.affiliateReducer))
+const adminData=affilateSingleDetails?.affiliateData
+
+
+
   return (
     <div className="w-[100%] text-white fixed top-0 bg-black p-2 lg:p-4 ">
       <div className="flex justify-between items-center w-[100%]">
@@ -19,7 +25,7 @@ const TopNavbar = () => {
             </span>
           </div>
           <div className="bg-[#22252A] flex items-center cursor-pointer justify-center w-[110px] p-2 rounded-[4px] lg:rounded-md">
-            <p className="text-sm font-bold">INR 0.00</p>
+            <p className="text-sm font-bold">{adminData?.currency} {adminData?.amount}</p>
 
           </div>
           <div onClick={()=>navigate("/account")} className="w-[40px] bg-[#22252A] h-[40px] cursor-pointer flex items-center justify-center  rounded-[50%]">

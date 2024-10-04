@@ -39,6 +39,7 @@ export const fetchGetRequest = async (endpoint) => {
   try {
     const response = await axios.get(`${API_BASE_URL}${endpoint}`, {
       headers: getHeaders(),
+    
     });
 
     return response.data;

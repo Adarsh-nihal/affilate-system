@@ -17,12 +17,12 @@ const ContactUs = () => {
                     buttonLabel="Contact Us"
 
                 />
-                <ContactCard
+                {/* <ContactCard
                     icon="💬"
                     title="Open Live Chat"
                     description="Contact Us"
                     buttonLabel="Contact Us"
-                />
+                /> */}
                 <ContactCard
                     icon="📞"
                     title="WhatsApp"

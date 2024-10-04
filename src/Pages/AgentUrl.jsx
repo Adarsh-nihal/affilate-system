@@ -5,7 +5,9 @@ import { retrieveUserDetails } from '../redux/authredux/middleware/localstoragec
 
 const AgentUrl = () => {
   const toast = useToast();
-  const {affiliateCode} = retrieveUserDetails('affiliateData');
+  const affilate = retrieveUserDetails('affiliateData');
+  const affiliateCode=affilate?.affiliateCode
+  console.log(affiliateCode,"affiliateCode")
   const urls = [
     "https://luckydaddy.in?refer_code=",
     "https://luckydaddy.in?refer_code=",

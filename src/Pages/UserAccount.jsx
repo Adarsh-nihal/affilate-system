@@ -4,6 +4,7 @@ import { Spinner, useToast } from "@chakra-ui/react";
 import { removeFromLocalStorage, retrieveUserDetails } from "../redux/authredux/middleware/localstorageconfig";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 const UserAccount = () => {
   const [activeTab, setActiveTab] = useState("Profile");
   const [oldPassword, setOldPassword] = useState("");
@@ -93,11 +94,8 @@ const [updateLoading,setUpdateLoading]=useState(false)
   const togglePasswordVisibility = (setStateFunc, currentState) => {
     setStateFunc(!currentState);
   };
-
-  const details = retrieveUserDetails("adminData");
-
-const adminData=details?.data?._doc
-console.log(adminData,"adminData")
+const affilateSingleDetails=useSelector((state=>state?.affiliateReducer))
+const adminData=affilateSingleDetails?.affiliateData
 
 
   return (
@@ -159,7 +157,7 @@ console.log(adminData,"adminData")
                 Phone: <span className="font-medium">{adminData?.phone}</span>
               </p>
               <p className="flex items-center justify-between">
-                Whatsapp: <span className="font-medium">{adminData?.whatsapp||"N/A"}</span>
+                Whatsapp: <span className="font-medium">{adminData?.whatsapp_no||"N/A"}</span>
               </p>
               
             </div>
@@ -236,16 +234,16 @@ console.log(adminData,"adminData")
            <div className="">
             <div className="mt-4 flex flex-col text-sm lg:text-[16px]  rounded-lg  w-[100%] lg:w-[40%] gap-5">
               <p className="flex items-center justify-between">
-                Bank Name: <span>bankakk</span>
+                Bank Name: <span>{adminData?.bank_details?.bank_name||"N/A"}</span>
               </p>
               <p className="flex items-center justify-between">
-                Branch: <span>jasola vihar shaheen bagh</span>
+                Bank Holder  : <span>{adminData?.bank_details?.bank_holder||"N/A"}</span>
               </p>
               <p className="flex items-center justify-between">
-                Account Number: <span>7565656767</span>
+                Account Number: <span>{adminData?.bank_details?.account_number||"N/A"}</span>
               </p>
               <p className="flex items-center justify-between">
-                IFSC Code: <span>kkhb564909</span>
+                IFSC Code: <span>{adminData?.bank_details?.ifsc_code||"N/A"}</span>
               </p>
             </div>
             <p className="mt-6 text-sm text-gray-400">

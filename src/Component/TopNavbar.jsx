@@ -24,8 +24,8 @@ const adminData=affilateSingleDetails?.affiliateData
               <PiLinkSimpleBold color="black" size={"20px"} />
             </span>
           </div>
-          <div className="bg-[#22252A] flex items-center cursor-pointer justify-center w-[110px] p-2 rounded-[4px] lg:rounded-md">
-            <p className="text-sm font-bold">{adminData?.currency} {adminData?.amount}</p>
+          <div className="bg-[#22252A] flex items-center cursor-pointer justify-center min-w-[110px] p-2 rounded-[4px] lg:rounded-md">
+            <p className="text-sm text-nowrap font-bold">{adminData?.currency} {(adminData?.amount&&adminData?.amount.toFixed(2))}</p>
 
           </div>
           <div onClick={()=>navigate("/account")} className="w-[40px] bg-[#22252A] h-[40px] cursor-pointer flex items-center justify-center  rounded-[50%]">

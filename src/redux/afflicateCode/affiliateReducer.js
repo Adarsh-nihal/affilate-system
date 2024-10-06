@@ -1,11 +1,12 @@
 // reducer.js
-import { SET_AFFILIATE_DATA, SET_AFFILIATE_DETAIL_DATA } from './actionType';
+import { SET_AFFILIATE_DATA, SET_AFFILIATE_DETAIL_DATA,SET_SETTING_DATA } from './actionType';
 
 
 const initialState = {
   affiliateCode: null,
   username: null,
-  affiliateData:{}
+  affiliateData:{},
+  settingData:{}
 };
 
 const affiliateReducer = (state = initialState, action) => {
@@ -22,6 +23,12 @@ const affiliateReducer = (state = initialState, action) => {
           affiliateData: action.payload,
           
         };
+        case SET_SETTING_DATA:
+          return {
+            ...state,
+            settingData: action.payload,
+            
+          };
     default:
       return state;
   }

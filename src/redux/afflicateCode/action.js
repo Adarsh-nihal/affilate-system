@@ -6,7 +6,7 @@
 // });
 
 // actions.js
-import { SET_AFFILIATE_DATA, SET_AFFILIATE_DETAIL_DATA } from './actionType';
+import { SET_AFFILIATE_DATA, SET_AFFILIATE_DETAIL_DATA,SET_SETTING_DATA } from './actionType';
 
 
 export const setAffiliateData = (affiliateCode, username) => ({
@@ -25,4 +25,10 @@ export const setAffiliateData = (affiliateCode, username) => ({
 export const setAffiliateDetailData = (affiliateDetail) => ({
   type: SET_AFFILIATE_DETAIL_DATA,
   payload: affiliateDetail,
+})
+
+
+export const getSettingDetails = (data) => ({
+  type: SET_SETTING_DATA,
+  payload: data,
 })

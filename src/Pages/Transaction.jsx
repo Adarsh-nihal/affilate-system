@@ -20,6 +20,8 @@ const totalPayoutAmount = affiliates?.payouts?.reduce((total, payout) => total +
           console.log(response, "responce123");
           setAffiliates(response.data); // Assuming response is an array of affiliates
      
+
+          
         } catch (error) {
           console.error("Error fetching affiliates:", error);
       

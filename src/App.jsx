@@ -9,7 +9,7 @@ import AllRoute from './Allroute/AllRoute'
 import {useLocation} from "react-router-dom"
 import BottomNavbar from './Component/BottomNavbar'
 import PermissionWrapper from './Allroute/PermissionWrapper'
-import { setAffiliateData, setAffiliateDetailData } from './redux/afflicateCode/action'
+import { getSettingDetails, setAffiliateData, setAffiliateDetailData } from './redux/afflicateCode/action'
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGetRequest } from './api/api'
 import { saveUserDetails } from './redux/authredux/middleware/localstorageconfig'
@@ -35,8 +35,26 @@ function App() {
     }
   };
 
+  const getSocailData = async () => {
+    try {
+      const response = await fetchGetRequest("/api/setting/get-setting/6532c132ed5efb8183a66703");
+
+      dispatch(getSettingDetails(response?.data))
+    } catch (error) {
+      toast({
+        description: `${error?.data?.message}`,
+        status: "error",
+        duration: 4000,
+        position: "top",
+        isClosable: true,
+      });
+    }
+  };
+
+
   useEffect(() => {
     fetchAffiliateData(); // Fetch data on load
+    getSocailData()
   }, []);
   return (
     <div className='w-[100%] main'>

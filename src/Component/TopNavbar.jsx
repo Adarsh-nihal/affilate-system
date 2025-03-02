@@ -16,7 +16,7 @@ const adminData=affilateSingleDetails?.affiliateData
     <div className="w-[100%] text-white fixed top-0 bg-black p-2 lg:p-4 ">
       <div className="flex justify-between items-center w-[100%]">
         <div>
-          <img onClick={()=>navigate("/dashboard")} src={logo} alt="" className="w-[80px] cursor-pointer" />
+          <img onClick={()=>navigate("/dashboard")} src={"https://firebasestorage.googleapis.com/v0/b/kudos-next.appspot.com/o/blog%2FWhatsApp%20Image%202025-02-13%20at%201.04.32%20AM%20(1).jpeg1739440053075?alt=media&token=74d76515-0d10-4571-bd17-aa382017f775"} alt="" className="w-[80px] cursor-pointer" />
         </div>
         <div className="flex items-center gap-1 lg:gap-3">
           <div onClick={()=>navigate("/agent-url")} className="w-[40px] bg-[#22252A] h-[40px] cursor-pointer flex items-center justify-center  rounded-[50%]">

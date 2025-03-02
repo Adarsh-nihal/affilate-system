@@ -16,9 +16,9 @@ const ContactUs = () => {
             <ContactCard
     icon="📱"
     title="Telegram Contact"
-    description="@jeetwinaffiliate"
+    description="@royaldeltinaffiliate"
     buttonLabel="Contact Us"
-    link={`tg://msg?text=${encodeURIComponent('@jeetwinaffiliate')}`}
+    link={`tg://msg?text=${encodeURIComponent('@royaldeltinaffiliate')}`}
   />
   
   <ContactCard
@@ -33,8 +33,8 @@ const ContactUs = () => {
     icon="✉️"
     title="Email"
     buttonLabel="Email"
-    link={`mailto:${settingDetails?.email?.link || 'affiliate@jeetwin.com'}`}
-    description="affiliate@jeetwin.com"
+    link={`mailto:${settingDetails?.email?.link || 'affiliate@royaldeltin.com'}`}
+    description="affiliate@royaldeltin.com"
   />
             </div>
         </div>

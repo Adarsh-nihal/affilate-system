@@ -9,9 +9,9 @@ const AgentUrl = () => {
   const affiliateCode=affilate?.affiliateCode
   console.log(affiliateCode,"affiliateCode")
   const urls = [
-    "https://luckydaddy.in?refer_code=",
-    "https://luckydaddy.in?refer_code=",
-    "https://luckydaddy.in?refer_code=",
+    "https://royaldeltin.com?refer_code=",
+    "https://royaldeltin.com?refer_code=",
+    "https://royaldeltin.com?refer_code=",
   ];
 
   const handleCopy = (url) => {

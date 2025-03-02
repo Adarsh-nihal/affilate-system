@@ -25,7 +25,7 @@ console.log(x,"res")
   const steps = [
     {
       title: "Signup",
-      description: "Exclusive Account with Jeetwin",
+      description: "Exclusive Account with royaldeltin",
       icon: "👤", // Add relevant icons if necessary
     },
     {
@@ -44,12 +44,12 @@ console.log(x,"res")
     {
       title: "Spinsvilla",
       content:
-        "Working with the Jeetwin affiliates is both convenient and easy...",
+        "Working with the royaldeltin affiliates is both convenient and easy...",
       rating: 5,
     },
     {
       title: "Guide2Gambling",
-      content: "We are happy to work with Jeetwin Affiliates...",
+      content: "We are happy to work with royaldeltin Affiliates...",
       rating: 5,
     },
     {
@@ -97,7 +97,7 @@ console.log(x,"res")
               Earn {affiliates?.share_percentage || 0}% Commission
             </p>
             <p className="font-bold  mt-2 text-sm md:text-lg">
-              Build your career with Jeetwin affiliate network now and start
+              Build your career with Royaldeltin affiliate network now and start
               earning immediately.
             </p>
           </div>
@@ -201,9 +201,9 @@ console.log(x,"res")
       </div>
       <footer className="mt-8">
   <div className="text-center space-y-4">
-    <p>About Jeetwin</p>
+    <p>About Royaldeltin</p>
     <p>
-      JeetWin was established in 2017... trusted gaming platform offering...
+    royaldeltin was established in 2017... trusted gaming platform offering...
     </p>
   </div>
 </footer>

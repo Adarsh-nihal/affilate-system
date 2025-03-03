@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Dashboard from './Pages/Dashboard'
 import TopNavbar from './Component/TopNavbar'
@@ -13,10 +12,12 @@ import { getSettingDetails, setAffiliateData, setAffiliateDetailData } from './r
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGetRequest } from './api/api'
 import { saveUserDetails } from './redux/authredux/middleware/localstorageconfig'
+import useFavicon from './hooks/hooks'
 function App() {
   const dispatch=useDispatch()
   const location=useLocation()
   const reduxData=useSelector(state=>state)
+  useFavicon();
  
 
   const fetchAffiliateData = async () => {
@@ -59,7 +60,7 @@ function App() {
   return (
     <div className='w-[100%] main'>
       {location.pathname!=="/"&&<TopNavbar/>}
-      <div className={`flex gap-2 ${location.pathname!=="/"?"p-2  pt-[65px] md:pt-[80px]":""}  w-[100%]`}>
+      <div className={`flex gap-2 ${location.pathname!=="/"?"p-2  pt-[65px] md:pt-[90px]":""}  w-[100%]`}>
       {location.pathname!=="/"&& <div className='lg:contents hidden'><div className='  w-[25%]'><Sidebar/></div></div> }
        <div className={`w-[100%] ${location.pathname!=="/"?"mb-[70px] lg:mb-0":""}`}>
         <AllRoute/>

@@ -10,8 +10,7 @@ const Dashboard = () => {
 const x=useSelector(state=>state.affilliateReducer)
 console.log(x,"res")
   const [affiliates, setAffiliates] = useState([]);
-
-  console.log(affiliates, "asas");
+const settingDetails=useSelector((state)=>state?.affiliateReducer?.settingData)||{}
 
   const commissionData = [
     { label: "Player Win & Losses", value: "INR 1,000,000" },
@@ -84,11 +83,11 @@ console.log(x,"res")
       {/* Banner */}
       <div className="w-[100%]">
         <div className="h-[180px] w-[100%]">
-          <img
-            src={affilate}
+          {settingDetails&&settingDetails?.affiliate_media&&settingDetails?.affiliate_media[0]?.url&&<img
+            src={settingDetails?.affiliate_media[0]?.url}
             alt="App"
             className="w-[100%]   h-[180px] lg:h-[280px] rounded-[5px]"
-          />
+          />}
         </div>
 
         <div className=" rounded-[5px] p-6 text-center ">
@@ -129,7 +128,7 @@ console.log(x,"res")
     <p className="text-[#F9BA1F] text-3xl font-bold">
       {affiliates?.platform_fee || 0}%
     </p>
-    <p className="text-gray-400 text-sm mt-2">Payment Fee</p>
+    <p className="text-gray-400 text-sm mt-2">platform Fee</p>
   </div>
 </div>
 
@@ -142,31 +141,23 @@ console.log(x,"res")
       <div className="mb-4 bg-gradient-to-r from-[#2D3035] to-[#22252A] rounded-[6px] p-2 ">
         <div className="flex justify-between p-4  rounded-md">
           <span>Player Win & Losses</span>
-          <span>INR 1,000,000</span>
+          {/* player_win_loss */}
+
+          <span>INR {affiliates?.player_win_loss||"0"}</span>
         </div>
       </div>
 
-      <div className="mb-4 bg-gradient-to-r from-[#2D3035] to-[#22252A] rounded-[6px] p-2 ">
+     
 
-        <div className="flex justify-between p-4  rounded-md">
-          <span>Platform Fee</span>
-          <span>18%</span>
-        </div>
-      </div>
-
-      <div className="mb-4 bg-gradient-to-r from-[#2D3035] to-[#22252A] rounded-[6px] p-2 ">
-
-        <div className="flex justify-between p-4 rounded-md">
-          <span>Bonus</span>
-          <span>INR 20,000</span>
-        </div>
-      </div>
+     
 
       <div className="mb-4 bg-gradient-to-r from-[#2D3035] to-[#22252A] rounded-[6px] p-2 ">
 
         <div className="flex justify-between p-4 rounded-md">
           <span>Net Win & Losses</span>
-          <span>INR 800,000</span>
+          {/* net_win_loss */}
+
+          <span>INR {affiliates?.net_win_loss||"0"}</span>
         </div>
       </div>
 
@@ -174,17 +165,12 @@ console.log(x,"res")
 
         <div className="flex justify-between p-4 rounded-md">
           <span>Commission Rate</span>
-          <span>50%</span>
+          {/* net_commission_rate */}
+          <span>{affiliates?.net_commission_rate||"0"}%</span>
         </div>
       </div>
 
-      <div className="mb-4 bg-gradient-to-r from-[#2D3035] to-[#22252A] rounded-[6px] p-2 ">
-
-        <div className="flex justify-between p-4  rounded-md">
-          <span>Net Commission</span>
-          <span>INR 400,000</span>
-        </div>
-      </div>
+    
     </div>
 
       <div className="my-8">

@@ -96,7 +96,7 @@ const [updateLoading,setUpdateLoading]=useState(false)
   };
 const affilateSingleDetails=useSelector((state=>state?.affiliateReducer))
 const adminData=affilateSingleDetails?.affiliateData
-
+console.log(adminData,"adminData")
 
   return (
     <div className="p-6 bg-[#22252A]  rounded-[5px] text-white">

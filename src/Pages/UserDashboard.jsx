@@ -38,7 +38,7 @@ const UserDashboard = () => {
       <div className="grid gap-2 grid-cols-1 md:grid-cols-2">
         <div className="flex bg-[#32383D] p-2 md:p-6  md:py-8 gap-2 rounded-md  items-center ">
           <img
-            src="https://via.placeholder.com/40"
+            src="https://bit.ly/dan-abramov"
             className="rounded-[50%] w-[50px] h-[50px]"
           />
           <div>
@@ -48,7 +48,7 @@ const UserDashboard = () => {
         </div>
         <div className="flex bg-[#32383D] p-2 md:p-6 md:py-8 gap-2 rounded-md  items-center">
           <img
-            src="https://via.placeholder.com/40"
+            src="https://bit.ly/sage-adebayo"
             className="rounded-[50%] w-[50px] h-[50px]"
           />
           <div>
@@ -57,20 +57,14 @@ const UserDashboard = () => {
           </div>
         </div>
         <div className="flex bg-[#32383D] p-2 md:p-6 md:py-8 gap-2 rounded-md  items-center ">
-          <img
-            src="https://via.placeholder.com/40"
-            className="rounded-[50%] w-[50px] h-[50px]"
-          />
+        <p className="bg-blue-500 w-[50px] h-[50px] rounded-[50%] flex items-center justify-center font-bold text-xl">TM</p>
           <div>
             <p>{affiliates?.data?.totalUsers}</p>
             <p className="text-[#AEAEAE] font-semibold">Total Member</p>
           </div>
         </div>
         <div className="flex bg-[#32383D] p-2 md:p-6 md:py-8 gap-2 rounded-md  items-center ">
-          <img
-            src="https://via.placeholder.com/40"
-            className="rounded-[50%] w-[50px] h-[50px]"
-          />
+         <p className="bg-green-500 w-[50px] h-[50px] rounded-[50%] flex items-center justify-center font-bold text-3xl">T</p>
           <div>
             <p>0.00</p>
             <p className="text-[#AEAEAE] font-semibold">Turnover</p>

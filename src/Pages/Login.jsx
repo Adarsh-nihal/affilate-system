@@ -81,6 +81,10 @@ const Login = () => {
         saveUserDetails("adminauth", admindetails);
         console.log(response, "during login");
         saveUserDetails("adminData", response.data);
+
+        setTimeout(() => {
+          window.location.reload();  // Reload the page after the toast
+        }, 2100); // Adjust timing slightly longer than the toast duration
       } else if (!response.data.success && response.data.status === "401") {
         setIsLoading(false);
         toast({

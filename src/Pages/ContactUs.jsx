@@ -16,9 +16,9 @@ const ContactUs = () => {
             <ContactCard
     icon="📱"
     title="Telegram Contact"
-    description="@royaldeltinaffiliate"
+    description="@magicbetsaffiliate"
     buttonLabel="Contact Us"
-    link={`tg://msg?text=${encodeURIComponent('@royaldeltinaffiliate')}`}
+    link={`tg://msg?text=${encodeURIComponent('@magicbetsaffiliate')}`}
   />
   
   <ContactCard
@@ -33,8 +33,8 @@ const ContactUs = () => {
     icon="✉️"
     title="Email"
     buttonLabel="Email"
-    link={`mailto:${settingDetails?.email?.link || 'affiliate@royaldeltin.com'}`}
-    description="affiliate@royaldeltin.com"
+    link={`mailto:${settingDetails?.email?.link || 'affiliate@magicbets.in'}`}
+    description="affiliate@magicbets.in"
   />
             </div>
         </div>

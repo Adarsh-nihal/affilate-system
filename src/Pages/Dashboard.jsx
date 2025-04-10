@@ -24,7 +24,7 @@ const settingDetails=useSelector((state)=>state?.affiliateReducer?.settingData)|
   const steps = [
     {
       title: "Signup",
-      description: "Exclusive Account with royaldeltin",
+      description: "Exclusive Account with magicbets",
       icon: "👤", // Add relevant icons if necessary
     },
     {
@@ -43,12 +43,12 @@ const settingDetails=useSelector((state)=>state?.affiliateReducer?.settingData)|
     {
       title: "Spinsvilla",
       content:
-        "Working with the royaldeltin affiliates is both convenient and easy...",
+        "Working with the magicbets affiliates is both convenient and easy...",
       rating: 5,
     },
     {
       title: "Guide2Gambling",
-      content: "We are happy to work with royaldeltin Affiliates...",
+      content: "We are happy to work with magicbets Affiliates...",
       rating: 5,
     },
     {
@@ -96,7 +96,7 @@ const settingDetails=useSelector((state)=>state?.affiliateReducer?.settingData)|
               Earn {affiliates?.share_percentage || 0}% Commission
             </p>
             <p className="font-bold  mt-2 text-sm md:text-lg">
-              Build your career with Royaldeltin affiliate network now and start
+              Build your career with magicbets affiliate network now and start
               earning immediately.
             </p>
           </div>
@@ -187,9 +187,9 @@ const settingDetails=useSelector((state)=>state?.affiliateReducer?.settingData)|
       </div>
       <footer className="mt-8">
   <div className="text-center space-y-4">
-    <p>About Royaldeltin</p>
+    <p>About magicbets</p>
     <p>
-    royaldeltin was established in 2017... trusted gaming platform offering...
+    magicbets was established in 2017... trusted gaming platform offering...
     </p>
   </div>
 </footer>

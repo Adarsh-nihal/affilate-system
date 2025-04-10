@@ -66,7 +66,7 @@ const UserDashboard = () => {
         <div className="flex bg-[#32383D] p-2 md:p-6 md:py-8 gap-2 rounded-md  items-center ">
          <p className="bg-green-500 w-[50px] h-[50px] rounded-[50%] flex items-center justify-center font-bold text-3xl">T</p>
           <div>
-            <p>0.00</p>
+            <p>{affiliates?.data?.turnover||0}</p>
             <p className="text-[#AEAEAE] font-semibold">Turnover</p>
           </div>
         </div>
